@@ -21,6 +21,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const publications = model("Publications", schema);
+const publications = model<IPublications>("Publications", schema);
 
 export { publications };

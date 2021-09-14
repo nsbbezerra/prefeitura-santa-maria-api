@@ -21,6 +21,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const bids = model("Bids", schema);
+const bids = model<IBids>("Bids", schema);
 
 export { bids };

@@ -27,6 +27,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const secretaries = model("Secretaries", schema);
+const secretaries = model<ISecretary>("Secretaries", schema);
 
 export { secretaries };

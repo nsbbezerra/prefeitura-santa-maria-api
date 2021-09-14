@@ -21,6 +21,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const deks = model("Desk", schema);
+const deks = model<IDesk>("Desk", schema);
 
 export { deks };

@@ -37,6 +37,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const news = model("News", schema);
+const news = model<INews>("News", schema);
 
 export { news };

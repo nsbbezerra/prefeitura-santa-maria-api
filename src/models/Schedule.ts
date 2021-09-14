@@ -34,6 +34,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const schedules = model("Schedules", schema);
+const schedules = model<ISchedule>("Schedules", schema);
 
 export { schedules };

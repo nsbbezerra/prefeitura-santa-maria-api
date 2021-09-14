@@ -17,6 +17,6 @@ schema.pre("save", function (next) {
   next();
 });
 
-const informatives = model("Informatives", schema);
+const informatives = model<IInformative>("Informatives", schema);
 
 export { informatives };
