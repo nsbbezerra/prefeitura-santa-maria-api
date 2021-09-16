@@ -23,6 +23,19 @@ import {
   DeletePublications,
   ShowPublications,
 } from "./controllers/PublicationsController";
+import {
+  CreateEvents,
+  CreateSchedule,
+  RemoveSchedule,
+  ShowSchedule,
+} from "./controllers/ScheduleController";
+import {
+  CreateSecretaries,
+  UpdateImage as UpdateSecretaryImage,
+  UpdateInfo as UpdateSecretaryInfo,
+  DeleteSecretary,
+  ShowSecretaries,
+} from "./controllers/SecretariesController";
 
 const router = Router();
 
@@ -50,5 +63,22 @@ router.delete("/informatives/:id", DeleteInformatives);
 router.post("/publications", multer(docs).single("pdf"), CreatePublications);
 router.get("/publications", ShowPublications);
 router.delete("/publications/:id", DeletePublications);
+
+/** SCHEDULLE - Agenda */
+router.post("/schedule", CreateSchedule);
+router.put("/schedule/:id", CreateEvents);
+router.delete("/schedule", RemoveSchedule);
+router.get("/schedule/:month/:year", ShowSchedule);
+
+/** SECRETARIES - Secretarias */
+router.get("/secretaries", ShowSecretaries);
+router.post("/secretaries", multer(img).single("thumbnail"), CreateSecretaries);
+router.put(
+  "/updateSecretaryImage/:id",
+  multer(img).single("thumbnail"),
+  UpdateSecretaryImage
+);
+router.put("/updateSecretaryInfo/:id", UpdateSecretaryInfo);
+router.delete("/secretaries/:id", DeleteSecretary);
 
 export { router };

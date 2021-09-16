@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 interface ISecretary {
+  title: string;
   name: string;
   address: string;
   phone: string;
@@ -13,6 +14,7 @@ interface ISecretary {
 }
 
 const schema = new Schema<ISecretary>({
+  title: { type: String, required: true },
   name: { type: String, required: true },
   address: { type: String, required: true },
   phone: { type: String, required: true },

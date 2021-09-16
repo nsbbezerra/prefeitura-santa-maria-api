@@ -75,7 +75,7 @@ const ShowPublications = async (
 ) => {
   try {
     const publication = await publications.find().sort({ date: -1 });
-    const url = configs.default_url;
+    const url = configs.default_docs_url;
     return res.status(200).json({ publication, url });
   } catch (error) {
     next(error);

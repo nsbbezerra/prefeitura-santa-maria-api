@@ -82,7 +82,7 @@ const Delete = async (req: Request, res: Response, next: NextFunction) => {
 
 const ShowBids = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const url = configs.default_url;
+    const url = configs.default_docs_url;
     const bid = await bids.find().sort({ date: -1 });
     return res.status(200).json({ url, bid });
   } catch (error) {

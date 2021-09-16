@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { router } from "./routes";
+import { resolve } from "path";
 
 interface HTTPError extends Error {
   status?: number;
@@ -16,5 +17,13 @@ app.use((error: HTTPError, req: Request, res: Response, next: NextFunction) => {
     errorMessage,
   });
 });
+app.use(
+  "/img",
+  express.static(resolve(__dirname, "..", "..", "uploads", "img"))
+);
+app.use(
+  "/docs",
+  express.static(resolve(__dirname, "..", "..", "uploads", "docs"))
+);
 
 export { app };

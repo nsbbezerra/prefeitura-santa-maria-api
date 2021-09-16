@@ -6,7 +6,7 @@ interface ISchedule {
   month: string;
   year: number;
   date: Date;
-  events: IEvents[];
+  events?: IEvents[];
   created_at: Date;
 }
 
