@@ -13,6 +13,7 @@ interface INews {
   month: string;
   year: number;
   created_at: Date;
+  tag: string;
 }
 
 interface IImages {
@@ -30,6 +31,7 @@ const schema = new Schema<INews>({
   year: { type: Number, required: true },
   galery: [{ image: { type: String } }],
   created_at: { type: Date, required: false },
+  tag: { type: String, required: true },
 });
 
 schema.pre("save", function (next) {

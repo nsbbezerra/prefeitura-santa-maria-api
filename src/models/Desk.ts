@@ -5,6 +5,7 @@ const model = mongoose.model;
 interface IDesk {
   name: string;
   text: string;
+  type: string;
   thumbnail: string;
   created_at: Date;
 }
@@ -12,6 +13,7 @@ interface IDesk {
 const schema = new Schema<IDesk>({
   name: { type: String, required: true },
   text: { type: String, required: true },
+  type: { type: String, enum: ["major", "vice-major"] },
   thumbnail: { type: String, required: true },
   created_at: { type: Date, required: false },
 });
