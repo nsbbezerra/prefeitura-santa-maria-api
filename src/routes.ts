@@ -7,7 +7,22 @@ import {
   Delete as DeleteBids,
   ShowBids,
 } from "./controllers/BidsController";
-import { CreateDesk, ShowDesk } from "./controllers/DeskController";
+import {
+  CreateDesk,
+  ShowDesk,
+  UpdateImage,
+  UpdateInfo,
+} from "./controllers/DeskController";
+import {
+  CreateInformatives,
+  ShowInformatives,
+  DeleteInformatives,
+} from "./controllers/InformativeController";
+import {
+  CreatePublications,
+  DeletePublications,
+  ShowPublications,
+} from "./controllers/PublicationsController";
 
 const router = Router();
 
@@ -19,5 +34,21 @@ router.get("/bids", ShowBids);
 /** DESKS - Gabinetes */
 router.post("/desk", multer(img).single("thumbnail"), CreateDesk);
 router.get("/desk", ShowDesk);
+router.put("/desk/:id", UpdateInfo);
+router.put(
+  "/changeImageDesk/:id",
+  multer(img).single("thumbnail"),
+  UpdateImage
+);
+
+/** INFORMATIVES - Imagens de Informativos */
+router.post("/informatives", multer(img).single("image"), CreateInformatives);
+router.get("/informatives", ShowInformatives);
+router.delete("/informatives/:id", DeleteInformatives);
+
+/** PUBLICATIONS - Publicações do diário oficial */
+router.post("/publications", multer(docs).single("pdf"), CreatePublications);
+router.get("/publications", ShowPublications);
+router.delete("/publications/:id", DeletePublications);
 
 export { router };
