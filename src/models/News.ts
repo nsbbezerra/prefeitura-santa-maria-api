@@ -8,6 +8,7 @@ interface INews {
   author: string;
   date: Date;
   image: string;
+  imageCopy: string;
   text: string;
   galery?: IImages[];
   month: string;
@@ -26,6 +27,7 @@ const schema = new Schema<INews>({
   author: { type: String, required: true },
   date: { type: Date, required: true },
   image: { type: String, required: true },
+  imageCopy: { type: String, required: true },
   text: { type: String, required: true },
   month: { type: String, required: true },
   year: { type: Number, required: true },

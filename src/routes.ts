@@ -37,7 +37,34 @@ import {
   ShowSecretaries,
 } from "./controllers/SecretariesController";
 
+import {
+  CreateGalery,
+  CreateNews,
+  FindNews,
+  FindNewsById,
+  UpdateNewsGalery,
+  UpdateNewsImage,
+  UpdateNewsInfo,
+} from "./controllers/NewsController";
+
 const router = Router();
+
+/** NEWS - Notícias */
+router.post("/news", multer(img).single("image"), CreateNews);
+router.put("/newsGalery/:id", multer(img).array("galery", 12), CreateGalery);
+router.get("/news", FindNews);
+router.get("/newById/:id", FindNewsById);
+router.put(
+  "/updateNewsGalery/:id",
+  multer(img).array("galery", 12),
+  UpdateNewsGalery
+);
+router.put(
+  "/updateNewsImage/:id",
+  multer(img).single("image"),
+  UpdateNewsImage
+);
+router.put("/news/:id", UpdateNewsInfo);
 
 /** BIDS - Licitações e Editais */
 router.post("/bids", multer(docs).array("pdf", 15), CreateBids);
