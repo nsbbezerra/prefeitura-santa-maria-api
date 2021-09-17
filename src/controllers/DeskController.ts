@@ -35,6 +35,15 @@ const CreateDesk = async (
   const { text, name, type } = req.body;
 
   try {
+    const desk = await deks.findOne({ type: type });
+    if (desk) {
+      return res
+        .status(400)
+        .json({
+          message:
+            "Já existe um cadastro com este cargo, se precisar alterar entre na seção LISTAGEM para alterar o cadastro",
+        });
+    }
     if (req.file) {
       compress(req.file, 200).then((newPath) => {
         deks.create({ text, thumbnail: newPath, name, type });
