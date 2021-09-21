@@ -1,5 +1,4 @@
 import { news } from "../models/News";
-import { compress } from "../configs/sharp";
 import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { resolve } from "path";

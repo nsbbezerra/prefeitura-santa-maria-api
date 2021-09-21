@@ -43,7 +43,7 @@ const CreateDesk = async (
       });
     }
     if (req.file) {
-      compress(req.file, 200).then((newPath) => {
+      compress(req.file, 300).then((newPath) => {
         deks.create({ text, thumbnail: newPath, name, type });
 
         return res

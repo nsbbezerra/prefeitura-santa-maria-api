@@ -31,7 +31,7 @@ const CreateInformatives = async (
 ) => {
   try {
     if (req.file) {
-      compress(req.file, 100).then((newPath) => {
+      compress(req.file, 300).then((newPath) => {
         informatives.create({ image: newPath });
 
         return res
