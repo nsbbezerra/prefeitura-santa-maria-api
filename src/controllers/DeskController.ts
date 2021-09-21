@@ -37,12 +37,10 @@ const CreateDesk = async (
   try {
     const desk = await deks.findOne({ type: type });
     if (desk) {
-      return res
-        .status(400)
-        .json({
-          message:
-            "Já existe um cadastro com este cargo, se precisar alterar entre na seção LISTAGEM para alterar o cadastro",
-        });
+      return res.status(400).json({
+        message:
+          "Já existe um cadastro com este cargo, se precisar alterar entre na seção LISTAGEM para alterar o cadastro",
+      });
     }
     if (req.file) {
       compress(req.file, 200).then((newPath) => {
@@ -78,12 +76,12 @@ const UpdateInfo = async (
   next: NextFunction
 ) => {
   const { id } = req.params;
-  const { text, name, type } = req.body;
+  const { text, name } = req.body;
 
   try {
     const desk = await deks.findOneAndUpdate(
       { _id: id },
-      { $set: { text, name, type } },
+      { $set: { text, name } },
       { new: true }
     );
 
@@ -112,11 +110,20 @@ const UpdateImage = async (req: Request, res: Response, next: NextFunction) => {
       );
       RemoveFile(path_to_file);
 
+      async function save(path) {
+        const newDesk = await deks.findOneAndUpdate(
+          { _id: id },
+          { $set: { thumbnail: path } },
+          { new: true }
+        );
+        return newDesk;
+      }
+
       compress(req.file, 200).then((newPath) => {
-        deks.findOneAndUpdate({ _id: id }, { $set: { thumbnail: newPath } });
+        const desk = save(newPath);
         return res
           .status(200)
-          .json({ message: "Informações alteradas com sucesso" });
+          .json({ message: "Informações alteradas com sucesso", desk });
       });
     } else {
       return res

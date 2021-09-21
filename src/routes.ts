@@ -46,8 +46,11 @@ import {
   UpdateNewsImage,
   UpdateNewsInfo,
 } from "./controllers/NewsController";
+import { Test } from "./controllers/TestController";
 
 const router = Router();
+
+router.get("/test", Test);
 
 /** NEWS - Notícias */
 router.post("/news", multer(img).single("image"), CreateNews);
