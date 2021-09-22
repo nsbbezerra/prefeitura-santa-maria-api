@@ -1,5 +1,5 @@
 import * as multer from "multer";
-import { resolve } from "path";
+import { resolve, extname, basename } from "path";
 import { randomBytes } from "crypto";
 
 const img = {
@@ -17,9 +17,11 @@ const docs = {
   storage: multer.diskStorage({
     destination: resolve(__dirname, "..", "..", "..", "uploads", "docs"),
     filename: (req, file, cb) => {
-      const ext = file.originalname.split(".")[1];
-      const name = randomBytes(64).toString("hex");
-      cb(null, `${name}.${ext}`);
+      let fileName = file.originalname;
+      let newName = fileName.replace(/\s/g, "-");
+      const ext = extname(newName);
+      const name = basename(newName, ext);
+      cb(null, `${name}-${Date.now()}${ext}`);
     },
   }),
 };
