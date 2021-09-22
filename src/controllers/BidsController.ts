@@ -33,7 +33,7 @@ const Create = async (
 ) => {
   const files = req.files;
   const { title, date } = req.body;
-
+  console.log(files);
   try {
     const bid = await bids.create({ title, date });
 
