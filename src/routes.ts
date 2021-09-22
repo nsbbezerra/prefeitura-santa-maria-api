@@ -97,7 +97,7 @@ router.delete("/publications/:id", DeletePublications);
 /** SCHEDULLE - Agenda */
 router.post("/schedule", CreateSchedule);
 router.put("/schedule/:id", CreateEvents);
-router.delete("/schedule", RemoveSchedule);
+router.put("/scheduleDel/:id", RemoveSchedule);
 router.get("/schedule/:month/:year", ShowSchedule);
 
 /** SECRETARIES - Secretarias */

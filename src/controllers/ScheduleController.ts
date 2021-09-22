@@ -58,11 +58,12 @@ const RemoveSchedule = async (
   next: NextFunction
 ) => {
   const { id } = req.params;
+  const { events } = req.body;
 
   try {
-    await schedules.findOneAndDelete({ _id: id });
+    await schedules.findOneAndUpdate({ _id: id }, { $set: { events: events } });
 
-    return res.status(200).json({ message: "Informação excluída com sucesso" });
+    return res.status(200).json({ message: "Informação removida com sucesso" });
   } catch (error) {
     next(error);
   }

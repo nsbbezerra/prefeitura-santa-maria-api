@@ -24,7 +24,7 @@ async function RemoveFile(url: string) {
   fs.unlink(url, (err) => {
     if (err) console.log(err);
     else {
-      console.log();
+      console.log("Removed");
     }
   });
 }
@@ -99,11 +99,15 @@ const UpdateImage = async (req: Request, res: Response, next: NextFunction) => {
       );
       RemoveFile(path_to_file);
 
-      compress(req.file, 100).then((newPath) => {
-        secretaries.findOneAndUpdate(
+      async function saveImage(pathImage) {
+        await secretaries.findOneAndUpdate(
           { _id: id },
-          { $set: { thumbnail: newPath } }
+          { $set: { thumbnail: pathImage } }
         );
+      }
+
+      compress(req.file, 300).then((newPath) => {
+        saveImage(newPath);
 
         return res
           .status(200)
