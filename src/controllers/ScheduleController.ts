@@ -40,11 +40,12 @@ const CreateEvents = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { events } = req.body;
+  const { schedule, description } = req.body;
   const { id } = req.params;
 
   try {
-    await schedules.findOneAndUpdate({ _id: id }, { $set: { events: events } });
+    const info = { schedule, description };
+    await schedules.findOneAndUpdate({ _id: id }, { $push: { events: info } });
     return res.status(201).json({ message: "Informação salva com sucesso" });
   } catch (error) {
     next(error);
