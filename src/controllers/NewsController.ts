@@ -129,6 +129,7 @@ const UpdateNewsImage = async (
   next: NextFunction
 ) => {
   const { id } = req.params;
+  const { imageCopy } = req.body;
   const { filename } = req.file;
   try {
     const noticia = await news.findOne({ _id: id });
@@ -145,7 +146,7 @@ const UpdateNewsImage = async (
 
     const nova_noticia = await news.findOneAndUpdate(
       { _id: id },
-      { $set: { image: filename } },
+      { $set: { image: filename, imageCopy: imageCopy } },
       { new: true }
     );
     const imagem = nova_noticia.image;
