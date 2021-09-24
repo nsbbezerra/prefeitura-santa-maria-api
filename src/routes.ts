@@ -48,6 +48,8 @@ import {
 } from "./controllers/NewsController";
 import { Test } from "./controllers/TestController";
 
+import { IndexPage, PublicationPage } from "./controllers/SiteController";
+
 const router = Router();
 
 router.get("/test", Test);
@@ -110,5 +112,9 @@ router.put(
 );
 router.put("/updateSecretaryInfo/:id", UpdateSecretaryInfo);
 router.delete("/secretaries/:id", DeleteSecretary);
+
+/** SITE CONTROLLER */
+router.get("/indexSite", IndexPage);
+router.get("/publicationPage/:page", PublicationPage);
 
 export { router };
