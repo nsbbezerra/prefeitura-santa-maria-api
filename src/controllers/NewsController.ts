@@ -212,7 +212,12 @@ const FindNewsById = async (
 
   try {
     const noticia = await news.findOne({ _id: id });
-    return res.status(200).json(noticia);
+    const others = await news
+      .find({ _id: { $ne: id } })
+      .sort({ date: -1 })
+      .limit(4);
+
+    return res.status(200).json({ noticia, others });
   } catch (error) {
     next(error);
   }
@@ -235,6 +240,15 @@ const FindNews = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const ShowNews = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const noticias = await news.find().sort({ date: -1 });
+    return res.status(200).json(noticias);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   CreateGalery,
   CreateNews,
@@ -243,4 +257,5 @@ export {
   UpdateNewsInfo,
   FindNews,
   FindNewsById,
+  ShowNews,
 };

@@ -42,6 +42,7 @@ import {
   CreateNews,
   FindNews,
   FindNewsById,
+  ShowNews,
   UpdateNewsGalery,
   UpdateNewsImage,
   UpdateNewsInfo,
@@ -69,6 +70,7 @@ router.get("/test", Test);
 router.post("/news", multer(img).single("image"), CreateNews);
 router.put("/newsGalery/:id", multer(img).array("galery", 12), CreateGalery);
 router.get("/news/:page", FindNews);
+router.get("/showNews", ShowNews);
 router.get("/newById/:id", FindNewsById);
 router.put(
   "/updateNewsGalery/:id",
