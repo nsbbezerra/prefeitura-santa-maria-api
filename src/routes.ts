@@ -50,6 +50,17 @@ import { Test } from "./controllers/TestController";
 
 import { IndexPage, PublicationPage } from "./controllers/SiteController";
 
+import {
+  RemoveOrdinance,
+  ShowOrdinance,
+  StoreOrinance,
+} from "./controllers/OrdinancesController";
+import {
+  RemoveVideo,
+  ShowVideos,
+  StoreVideos,
+} from "./controllers/VideosController";
+
 const router = Router();
 
 router.get("/test", Test);
@@ -112,6 +123,16 @@ router.put(
 );
 router.put("/updateSecretaryInfo/:id", UpdateSecretaryInfo);
 router.delete("/secretaries/:id", DeleteSecretary);
+
+/** ORDINANCES */
+router.post("/ordinances", multer(docs).single("pdf"), StoreOrinance);
+router.delete("/ordinances/:id", RemoveOrdinance);
+router.get("/ordinances/:secretary_id/:page", ShowOrdinance);
+
+/** VIDEOS */
+router.get("/videos/:page", ShowVideos);
+router.post("/videos", StoreVideos);
+router.delete("/videos/:id", RemoveVideo);
 
 /** SITE CONTROLLER */
 router.get("/indexSite", IndexPage);
