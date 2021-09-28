@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { resolve } from "path";
 import { mongoose } from "../database/database";
+import { configs } from "../configs";
 
 interface INews extends mongoose.Document {
   title: string;
@@ -218,9 +219,17 @@ const FindNewsById = async (
 };
 
 const FindNews = async (req: Request, res: Response, next: NextFunction) => {
+  const { page } = req.params;
+  const actPage = parseInt(page) - 1;
+
   try {
-    const noticias = await news.find().sort({ date: -1 });
-    return res.status(200).json(noticias);
+    const count = await news.countDocuments();
+    const noticias = await news
+      .find()
+      .sort({ date: -1 })
+      .limit(configs.docs_per_page)
+      .skip(configs.docs_per_page * actPage);
+    return res.status(200).json({ noticias, count });
   } catch (error) {
     next(error);
   }
