@@ -1,4 +1,5 @@
 import { ordinances } from "../models/Ordinances";
+import { secretaries } from "../models/Secretaries";
 import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { resolve } from "path";
