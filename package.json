@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "build": "tsc --build",
+    "serve": "node build/server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
