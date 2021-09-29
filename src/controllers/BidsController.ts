@@ -9,8 +9,12 @@ import { configs } from "../configs/index";
 interface IBids extends mongoose.Document {
   title: string;
   date: Date;
-  file: string;
+  file: IFile[];
   created_at: Date;
+}
+
+interface IFile {
+  file: string;
 }
 
 interface CustomRequest<T> extends Request {
@@ -90,4 +94,22 @@ const ShowBids = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { Create, Delete, ShowBids };
+const ShowBidsPag = async (req: Request, res: Response, next: NextFunction) => {
+  const { page } = req.params;
+  const actPage = parseInt(page) - 1;
+
+  try {
+    const count = await bids.countDocuments();
+    const bid = await bids
+      .find()
+      .sort({ date: -1 })
+      .limit(configs.docs_per_page)
+      .skip(configs.docs_per_page * actPage);
+
+    return res.status(200).json({ bid, count });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { Create, Delete, ShowBids, ShowBidsPag };

@@ -6,6 +6,7 @@ import {
   Create as CreateBids,
   Delete as DeleteBids,
   ShowBids,
+  ShowBidsPag,
 } from "./controllers/BidsController";
 import {
   CreateDesk,
@@ -88,6 +89,7 @@ router.put("/news/:id", UpdateNewsInfo);
 router.post("/bids", multer(docs).array("pdf", 15), CreateBids);
 router.delete("/bids/:id", DeleteBids);
 router.get("/bids", ShowBids);
+router.get("/bidPag/:page", ShowBidsPag);
 
 /** DESKS - Gabinetes */
 router.post("/desk", multer(img).single("thumbnail"), CreateDesk);
