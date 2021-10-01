@@ -62,6 +62,11 @@ import {
   ShowVideos,
   StoreVideos,
 } from "./controllers/VideosController";
+import {
+  ShowDecrees,
+  RemoveDecrees,
+  StoreDecrees,
+} from "./controllers/DecreesController";
 
 const router = Router();
 
@@ -107,7 +112,7 @@ router.get("/informatives", ShowInformatives);
 router.delete("/informatives/:id", DeleteInformatives);
 
 /** PUBLICATIONS - Publicações do diário oficial */
-router.post("/publications", multer(docs).single("pdf"), CreatePublications);
+router.post("/publications", CreatePublications);
 router.get("/publications", ShowPublications);
 router.delete("/publications/:id", DeletePublications);
 
@@ -137,6 +142,11 @@ router.get("/ordinances/:secretary_id/:page", ShowOrdinance);
 router.get("/videos/:page", ShowVideos);
 router.post("/videos", StoreVideos);
 router.delete("/videos/:id", RemoveVideo);
+
+/** DECREES */
+router.get("/decrees/:page", ShowDecrees);
+router.post("/decrees", multer(docs).single("pdf"), StoreDecrees);
+router.delete("/decrees/:id", RemoveDecrees);
 
 /** SITE CONTROLLER */
 router.get("/indexSite", IndexPage);
