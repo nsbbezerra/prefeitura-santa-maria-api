@@ -7,7 +7,7 @@ interface ISecretary {
   name: string;
   address: string;
   phone: string;
-  email: string;
+  email?: string;
   schedule: string;
   thumbnail: string;
   created_at: Date;
@@ -18,7 +18,7 @@ const schema = new Schema<ISecretary>({
   name: { type: String, required: true },
   address: { type: String, required: true },
   phone: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: false },
   schedule: { type: String, required: true },
   thumbnail: { type: String, required: true },
   created_at: { type: Date, required: false },

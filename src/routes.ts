@@ -43,6 +43,7 @@ import {
   CreateNews,
   FindNews,
   FindNewsById,
+  RemoveNews,
   ShowNews,
   UpdateNewsGalery,
   UpdateNewsImage,
@@ -89,6 +90,7 @@ router.put(
   UpdateNewsImage
 );
 router.put("/news/:id", UpdateNewsInfo);
+router.delete("/news/:id", RemoveNews);
 
 /** BIDS - Licitações e Editais */
 router.post("/bids", multer(docs).array("pdf", 15), CreateBids);

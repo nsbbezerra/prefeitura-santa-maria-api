@@ -35,7 +35,7 @@ const CreateSecretaries = async (
   next: NextFunction
 ) => {
   const { title, name, address, phone, email, schedule } = req.body;
-
+  console.log(req.file);
   try {
     if (req.file) {
       compress(req.file, 300).then((newPath) => {

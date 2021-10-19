@@ -249,6 +249,47 @@ const ShowNews = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const RemoveNews = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  try {
+    const findNews = await news.findOne({ _id: id });
+
+    if (findNews.galery.length) {
+      findNews.galery.forEach((element) => {
+        const path_to_file = resolve(
+          __dirname,
+          "..",
+          "..",
+          "..",
+          "uploads",
+          "img",
+          element.image
+        );
+        RemoveFile(path_to_file);
+      });
+    }
+
+    const path_to_image = resolve(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "uploads",
+      "img",
+      findNews.image
+    );
+
+    RemoveFile(path_to_image);
+
+    await news.findOneAndRemove({ _id: id });
+
+    return res.status(200).json({ message: "Informação removida com sucesso" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   CreateGalery,
   CreateNews,
@@ -258,4 +299,5 @@ export {
   FindNews,
   FindNewsById,
   ShowNews,
+  RemoveNews,
 };
