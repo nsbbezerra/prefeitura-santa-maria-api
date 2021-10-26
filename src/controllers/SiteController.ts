@@ -4,6 +4,7 @@ import { publications } from "../models/Publications";
 import { news } from "../models/News";
 import { configs } from "../configs";
 import { videos } from "../models/Videos";
+import { banner } from "../models/Banners";
 
 const IndexPage = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -14,7 +15,10 @@ const IndexPage = async (req: Request, res: Response, next: NextFunction) => {
     const publication = await publications.find().sort({ date: -1 }).limit(6);
     const noticia = await news.find().sort({ date: -1 }).limit(4);
     const video = await videos.find().sort({ created_at: -1 }).limit(4);
-    return res.status(200).json({ informative, publication, noticia, video });
+    const banners = await banner.find().sort({ created_at: -1 });
+    return res
+      .status(200)
+      .json({ informative, publication, noticia, video, banners });
   } catch (error) {
     next(error);
   }

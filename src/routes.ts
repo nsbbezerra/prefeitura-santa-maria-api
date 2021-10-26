@@ -68,10 +68,20 @@ import {
   RemoveDecrees,
   StoreDecrees,
 } from "./controllers/DecreesController";
+import {
+  StoreBanner,
+  FindBanner,
+  RemoveBanner,
+} from "./controllers/BannerControllers";
 
 const router = Router();
 
 router.get("/test", Test);
+
+/** BANNER */
+router.get("/banner", FindBanner);
+router.post("/banner", multer(img).single("banner"), StoreBanner);
+router.delete("/banner/:id", RemoveBanner);
 
 /** NEWS - Notícias */
 router.post("/news", multer(img).single("image"), CreateNews);
